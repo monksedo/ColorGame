@@ -20,7 +20,8 @@ let btnreset = document.querySelector('.btn-reset');
 let btneasy = document.querySelector('.btn-easy');
 let btnhard = document.querySelector('.btn-hard');
 let rowTop3 = document.querySelector('.row-top3');
-let rowBottom3 = document.querySelector('.row-buttom3');
+let rowBottom3 = document.querySelector('.row-bottom3');
+let titleBox = document.querySelector('.title-box');
 
 btneasy.addEventListener('click', function () {
   btneasy.classList.add('selected');
@@ -53,6 +54,7 @@ btnreset.addEventListener('click', function () {
     squares[i].style.backgroundColor = colors[i];
   }
   h1.style.backgroundColor = '#222222';
+  titleBox.style.backgroundColor = '#222222';
   btnreset.textContent = "New Color";
   console.log(colors);
 });
@@ -74,6 +76,8 @@ for (let i = 0; i < colors.length; i++) {
       // alert('Correct!');
       message.textContent = 'Correct!';
       btnreset.textContent = 'Play Again?';
+      titleBox.style.backgroundColor = clickedColor;
+
       changeColors(clickedColor);
       h1.style.backgroundColor = clickedColor;
     } else {
