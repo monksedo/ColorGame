@@ -16,10 +16,51 @@ let pickedColor = pickColor();
 let colorDisplay = document.getElementById('colorDisplay');
 let message = document.getElementById('message');
 let h1 = document.querySelector('h1');
+let btnreset = document.querySelector('.btn-reset');
+let btneasy = document.querySelector('.btn-easy');
+let btnhard = document.querySelector('.btn-hard');
+let rowTop3 = document.querySelector('.row-top3');
+let rowBottom3 = document.querySelector('.row-buttom3');
+
+btneasy.addEventListener('click', function () {
+  btneasy.classList.add('selected');
+  btnhard.classList.remove('selected');
+  rowTop3.style.display = 'none';
+  colors = generateRandomColor(3);
+  console.log(colors);
+})
+
+btnhard.addEventListener('click', function () {
+  btneasy.classList.remove('selected');
+  btnhard.classList.add('selected');
+  rowTop3.style.display = 'flex';
+  colors = generateRandomColor(6);
+  console.log(colors);
+})
+
+
+// Reset button
+btnreset.addEventListener('click', function () {
+  // generate all new colors
+  colors = generateRandomColor(6);
+  // pick a new random color from array
+  pickedColor = pickColor();
+  // change colorDisplay to match picked Color
+  colorDisplay.textContent = pickedColor;
+
+  // change colors to squares
+  for (let i = 0; i < colors.length; i++) {
+    squares[i].style.backgroundColor = colors[i];
+  }
+  h1.style.backgroundColor = '#222222';
+  btnreset.textContent = "New Color";
+  console.log(colors);
+});
+
 
 colorDisplay.textContent = pickedColor;
 
-for (let i = 0; i < squares.length; i++) {
+for (let i = 0; i < colors.length; i++) {
   // add initial color to square
   squares[i].style.backgroundColor = colors[i];
 
@@ -32,6 +73,7 @@ for (let i = 0; i < squares.length; i++) {
     if (clickedColor === pickedColor) {
       // alert('Correct!');
       message.textContent = 'Correct!';
+      btnreset.textContent = 'Play Again?';
       changeColors(clickedColor);
       h1.style.backgroundColor = clickedColor;
     } else {
